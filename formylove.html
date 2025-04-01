@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Meu Amor 💖</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background 1s ease-in-out;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #e60073;
+        }
+        .message {
+            display: none;
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .btn {
+            background: #e60073;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #b3005e;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .countdown {
+            font-size: 20px;
+            color: #e60073;
+            margin-top: 15px;
+            display: none;
+        }
+        .heart {
+            font-size: 30px;
+            opacity: 0;
+            animation: float 1.5s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-10px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.5; }
+        }
+    </style>
+    <script>
+        function showMessage() {
+            const button = document.querySelector(".btn");
+            button.disabled = true;
+            button.innerText = "Aguarde...";
+            
+            let countdown = 5;
+            const countdownElement = document.getElementById("countdown");
+            countdownElement.style.display = "block";
+            
+            const timer = setInterval(() => {
+                countdownElement.innerText = `Mensagem aparece em ${countdown}...`;
+                countdown--;
+                
+                if (countdown < 0) {
+                    clearInterval(timer);
+                    countdownElement.style.display = "none";
+                    
+                    const message = document.getElementById("message");
+                    message.style.display = "block";
+                    setTimeout(() => {
+                        message.style.opacity = "1";
+                    }, 100);
+                    
+                    document.body.style.background = "linear-gradient(to right, #fad0c4, #ff9a9e)";
+                    button.innerText = "Mensagem revelada 💖";
+                    
+                    showHearts();
+                }
+            }, 1000);
+        }
+        
+        function showHearts() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement("div");
+                    heart.classList.add("heart");
+                    heart.innerHTML = "❤️";
+                    heart.style.position = "absolute";
+                    heart.style.left = Math.random() * 100 + "vw";
+                    heart.style.top = Math.random() * 100 + "vh";
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }, i * 500);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>para meu amorzin 💕</h1>
+        <button class="btn" onclick="showMessage()">Clique para ver a mensagem</button>
+        <p id="countdown" class="countdown"></p>
+        <p id="message" class="message">amor, você é a melhor parte dos meus dias! obrigado por estar sempre cmg das vezes que eu precisei. Eu te amo muito! 💖</p>
+    </div>
+</body>
+</html>
