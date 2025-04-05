@@ -14,6 +14,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             transition: background 1s ease-in-out;
+            flex-direction: column;
         }
         .container {
             background: white;
@@ -60,6 +61,25 @@
             opacity: 0;
             animation: float 1.5s infinite ease-in-out;
         }
+        .image-container img, .video-container video {
+            width: 70%; /* Diminuído de 80% para 70% */
+            height: auto;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .video-container p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e60073;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            margin-top: 15px;
+        }
         @keyframes float {
             0% { transform: translateY(0); opacity: 0.5; }
             50% { transform: translateY(-10px); opacity: 1; }
@@ -94,6 +114,7 @@
                     button.innerText = "Mensagem revelada 💖";
                     
                     showHearts();
+                    revealImages();
                 }
             }, 1000);
         }
@@ -111,9 +132,30 @@
                     
                     setTimeout(() => {
                         heart.remove();
-                    }, 2000);
+                    }, 4000);
                 }, i * 500);
             }
+        }
+        
+        function revealImages() {
+            const images = document.querySelectorAll(".image-container img");
+            images.forEach((img, index) => {
+                setTimeout(() => {
+                    img.style.display = "block";
+                    setTimeout(() => { img.style.opacity = "1"; }, 100);
+                }, (index + 1) * 2000);
+            });
+            
+            setTimeout(() => {
+                const video = document.querySelector(".video-container video");
+                const videoText = document.querySelector(".video-container p");
+                video.style.display = "block";
+                videoText.style.display = "block";
+                setTimeout(() => {
+                    video.style.opacity = "1";
+                    videoText.style.opacity = "1";
+                }, 100);
+            }, (images.length + 1) * 2000);
         }
     </script>
 </head>
@@ -122,7 +164,19 @@
         <h1>para meu amorzin 💕</h1>
         <button class="btn" onclick="showMessage()">Clique para ver a mensagem</button>
         <p id="countdown" class="countdown"></p>
-        <p id="message" class="message">amor, você é a melhor parte dos meus dias! obrigado por estar sempre cmg das vezes que eu precisei. Eu te amo muito! 💖</p>
+        <p id="message" class="message"> Amor, você é a melhor parte dos meus dias! Sou grato por ter você na minha vida. Eu amo amar você 💖</p>
     </div>
+    <div class="image-container">
+        <img src="love1.jpg" alt="Foto nossa 1">
+        <img src="love2.jpg" alt="Foto nossa 2">
+        <img src="love3.jpg" alt="Foto nossa 3">
+    </div>
+    <div class="video-container">
+        <video src="love4.mp4" controls></video>
+        <p>Separados somos fortes, juntos imbatíveis</p>
+    </div>
+
+<!-- Adicionando o áudio -->
+    <audio id="music" src="ilusao.mp3" preload="auto"></audio>
 </body>
 </html>
